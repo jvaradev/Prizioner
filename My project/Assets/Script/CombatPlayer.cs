@@ -22,11 +22,7 @@ public class CombatPlayer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public void GetDamage(float damage, Vector2 posicion)
     {
         health -= damage;
