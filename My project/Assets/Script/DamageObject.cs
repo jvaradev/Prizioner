@@ -9,6 +9,7 @@ public class DamageObject : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
+            collision.gameObject.GetComponent<CombatPlayer>().GetDamage(20, collision.GetContact(0).normal);
             collision.transform.GetComponent<PlayerRespawn>().PlayerDamaged();
         }
     }

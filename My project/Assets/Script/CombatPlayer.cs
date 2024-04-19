@@ -7,10 +7,16 @@ public class CombatPlayer : MonoBehaviour
     private float health;
     private float maxHealth = 100;
     [SerializeField]private HealthBar healthBar;
+    private MovimientoJugador movimientoJugador;
+    [SerializeField] private float tiempoPerdida;
+    private Animator animator;
+    private BoxCollider2D bc2D;
     
     // Start is called before the first frame update
     private void Start()
     {
+        movimientoJugador = GetComponent<MovimientoJugador>();
+        animator = GetComponent<Animator>();
         health = maxHealth;
         healthBar.inicialiteActualHealth(health);
     }
@@ -21,13 +27,24 @@ public class CombatPlayer : MonoBehaviour
         
     }
 
-    public void GetDamage(float damage)
+    public void GetDamage(float damage, Vector2 posicion)
     {
         health -= damage;
         healthBar.changeActualHealth(health);
+        StartCoroutine(PerderControl());
+        movimientoJugador.Rebote(posicion);
         if (health <= 0)
         {
-            Destroy(gameObject);
+            bc2D = GetComponent<BoxCollider2D>();
+            animator.SetBool("Death", true);
         }
+    }
+    
+    public IEnumerator PerderControl()
+    {
+        movimientoJugador.sePuedeMover = false;
+        yield return new WaitForSeconds(tiempoPerdida);
+        movimientoJugador.sePuedeMover = true;
+
     }
 }

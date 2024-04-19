@@ -9,6 +9,8 @@ public class MovimientoJugador : MonoBehaviour
     private Rigidbody2D rb2D;
     public Animator animator;
     private SpriteRenderer spriteRenderer;
+    public bool sePuedeMover = true;
+    [SerializeField] private Vector2 velocidadRebote;
 
     void Start()
     {
@@ -19,9 +21,13 @@ public class MovimientoJugador : MonoBehaviour
 
     void FixedUpdate()
     {
-        Movement();
-        Jump();
-        Fall();
+        if (sePuedeMover)
+        {
+            Movement();
+            Jump();
+            Fall(); 
+        }
+        
     }
 
     //Movimiento horizontal con animaciones
@@ -78,5 +84,10 @@ public class MovimientoJugador : MonoBehaviour
         {
             animator.SetBool("Fall", false);
         }
+    }
+
+    public void Rebote(Vector2 puntoGolpe)
+    {
+        rb2D.velocity = new Vector2(-velocidadRebote.x * puntoGolpe.x, velocidadRebote.y);
     }
 }
