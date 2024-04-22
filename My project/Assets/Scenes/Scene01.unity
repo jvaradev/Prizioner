@@ -3656,6 +3656,7 @@ GameObject:
   - component: {fileID: 1472111980}
   - component: {fileID: 1472111977}
   - component: {fileID: 1472111985}
+  - component: {fileID: 1472111986}
   m_Layer: 0
   m_Name: Protagonista_Sprite
   m_TagString: Player
@@ -3756,7 +3757,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.005501151, y: 0.0013554692}
+  m_Offset: {x: -0.005501151, y: -0.003787443}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3767,7 +3768,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.17156148, y: 0.27558845}
+  m_Size: {x: 0.17156148, y: 0.28587428}
   m_EdgeRadius: 0
 --- !u!212 &1472111983
 SpriteRenderer:
@@ -3844,13 +3845,30 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1472111976}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7edf42f62fbe4c51bc9b446235c669f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3.5
   animator: {fileID: 0}
+--- !u!114 &1472111986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472111976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 582fd921f29180f49a7b842003eb472c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  jumpSpeed: 4
+  animator: {fileID: 0}
+  sePuedeMover: 1
+  velocidadRebote: {x: 0, y: 0}
 --- !u!1 &1513596439
 GameObject:
   m_ObjectHideFlags: 0
