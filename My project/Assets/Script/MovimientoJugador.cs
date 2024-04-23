@@ -49,12 +49,14 @@ public class MovimientoJugador : MonoBehaviour
         if (Input.GetKey("d") || Input.GetKey("right"))
         {
             animator.SetBool("Run", true);
+            animator.SetBool("Fall", false);
             rb2D.velocity = new Vector2(speed, rb2D.velocity.y);
             spriteRenderer.flipX = false; // No invertir la imagen
         }
         else if (Input.GetKey("a") || Input.GetKey("left"))
         {
             animator.SetBool("Run", true);
+            animator.SetBool("Fall", false);
             rb2D.velocity = new Vector2(-speed, rb2D.velocity.y);
             spriteRenderer.flipX = true; // Invertir horizontalmente
         }
@@ -89,11 +91,11 @@ public class MovimientoJugador : MonoBehaviour
     //Movimiento de caer con animaciones
     private void Fall()
     {
-        if (rb2D.velocity.y < 0)
+        if (!CheckGround.isGround && rb2D.velocity.y < 0)
         {
             animator.SetBool("Fall", true);
         }
-        else if (rb2D.velocity.y > 0)
+        else
         {
             animator.SetBool("Fall", false);
         }
