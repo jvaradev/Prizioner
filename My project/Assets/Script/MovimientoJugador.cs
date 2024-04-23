@@ -3,7 +3,8 @@ using UnityEngine;
 public class MovimientoJugador : MonoBehaviour
 {
     public float speed = 5f;
-    public float jumpSpeed = 4f;
+    public float jumpSpeed = 6f;
+    public bool rayCast = true;
     private Rigidbody2D rb2D;
     public Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -13,22 +14,28 @@ public class MovimientoJugador : MonoBehaviour
     public bool sePuedeMover = true;
     [SerializeField] private Vector2 velocidadRebote;
 
+    public bool headBlock;
+    [SerializeField] private BoxCollider2D crouchCollider;
+    private Vector2 offsetCrouch;
+    [SerializeField] private BoxCollider2D idleCollider;
+    private Vector2 offsetIdle;
+    public float distHead = 0.5f;
+    public LayerMask capaPlataforma;
+
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         bc2D = GetComponent<BoxCollider2D>();
-
-        // Almacenar el tamaño y el offset originales del collider
-        originalColliderSize = bc2D.size;
-        originalColliderOffset = bc2D.offset;
+        
     }
 
     void FixedUpdate()
     {
         if (sePuedeMover)
         {
+            CheckTop();
             Movement();
             Jump();
             Fall();
@@ -97,39 +104,70 @@ public class MovimientoJugador : MonoBehaviour
         rb2D.velocity = new Vector2(-velocidadRebote.x * puntoGolpe.x, velocidadRebote.y);
     }
 
+    //posiblemente tenga que separar en Crouch y CrouchWalk
     public void Crouch()
     {
-        speed = 3f;
         if (Input.GetKey("s") && CheckGround.isGround)
         {
-            // Reducir el tamaño del collider
-            bc2D.size = new Vector2(originalColliderSize.x, originalColliderSize.y * 0.5f);
-            // Mover el collider hacia abajo
-            bc2D.offset = new Vector2(originalColliderOffset.x, originalColliderOffset.y - (originalColliderSize.y * 0.25f));
+            speed = 3f;
             animator.SetBool("Crouch", true);
+            idleCollider.enabled = false;
             if (Input.GetKey("d"))
             {
                 animator.SetBool("CrouchWalk", true);
                 rb2D.velocity = new Vector2(speed, rb2D.velocity.y);
                 spriteRenderer.flipX = false;
             }
-            else if (Input.GetKey("a"))
+            if (Input.GetKey("a"))
             {
                 animator.SetBool("CrouchWalk", true);
                 rb2D.velocity = new Vector2(-speed, rb2D.velocity.y);
                 spriteRenderer.flipX = true; // Invertir horizontalmente
             }
-            else
-            {
-                animator.SetBool("CrouchWalk", false);
-            }
         }
         else
         {
-            // Restaurar el tamaño y el offset originales del collider
-            bc2D.size = originalColliderSize;
-            bc2D.offset = originalColliderOffset;
+            CheckHeadBlock();
+        }
+    }
+
+    private void CheckHeadBlock()
+    {
+        if (!headBlock)
+        {
+            speed = 5f;
             animator.SetBool("Crouch", false);
+            animator.SetBool("CrouchWalk", false);
+            idleCollider.enabled = true;
+        }
+
+        if (headBlock && ((!Input.GetKey("d"))||!Input.GetKey("a")))
+        {
+            animator.SetBool("Crouch", true);
+            animator.SetBool("CrouchWalk", false);
+        }
+            
+        if (headBlock && ((Input.GetKey("d"))||Input.GetKey("a")))
+        {
+            animator.SetBool("Crouch", true);
+            animator.SetBool("CrouchWalk", true);
+        }
+    }
+
+    void CheckTop()
+    {
+        Vector2 pos = transform.position;
+        Vector2 offset = new Vector2(0f, idleCollider.size.y);
+
+        RaycastHit2D checkHead = Physics2D.Raycast(pos + offset, Vector2.up, distHead, capaPlataforma);
+
+        if (checkHead)
+        {
+            headBlock = true;
+        }
+        else
+        {
+            headBlock = false;
         }
     }
 }
