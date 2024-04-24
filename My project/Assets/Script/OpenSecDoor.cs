@@ -38,6 +38,7 @@ public class OpenSecDoor : MonoBehaviour
     {
         squareObject.SetActive(false);
         stayDoor = false;
+        CheckGround.isGround = true;
     }
 
     private void Update()

@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class CombatPlayer : MonoBehaviour
 {
+    [SerializeField] public float positionXRespawn;
+    [SerializeField] public float positionYRespawn;
     private float health;
-    private float maxHealth = 100;
+    public static float maxHealth = 100;
     [SerializeField]private HealthBar healthBar;
     private MovimientoJugador movimientoJugador;
     [SerializeField] private float tiempoPerdida;
@@ -33,14 +35,26 @@ public class CombatPlayer : MonoBehaviour
         {
             bc2D = GetComponent<BoxCollider2D>();
             animator.SetBool("Death", true);
+            // Espera unos segundos antes de cambiar de posición
+            StartCoroutine(EsperarAntesDeCambiarPosicion());
         }
     }
     
-    public IEnumerator PerderControl()
+    private IEnumerator PerderControl()
     {
         movimientoJugador.sePuedeMover = false;
         yield return new WaitForSeconds(tiempoPerdida);
         movimientoJugador.sePuedeMover = true;
+    }
 
+    private IEnumerator EsperarAntesDeCambiarPosicion()
+    {
+        movimientoJugador.sePuedeMover = false;
+        // Espera unos segundos después de la muerte
+        yield return new WaitForSeconds(2.0f); // Cambia este valor según lo que necesites
+        // Cambiar la posición después de la espera
+        bc2D.transform.position = new Vector3(positionXRespawn, positionYRespawn);
+        animator.SetBool("Death", false);
+        movimientoJugador.sePuedeMover = true;
     }
 }

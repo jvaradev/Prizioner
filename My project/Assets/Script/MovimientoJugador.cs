@@ -37,12 +37,13 @@ public class MovimientoJugador : MonoBehaviour
         {
             CheckTop();
             Movement();
-            Jump();
             Fall();
             Crouch();
+            Jump();
         }
     }
-
+    
+    
     //Movimiento horizontal con animaciones
     private void Movement()
     {
@@ -65,6 +66,7 @@ public class MovimientoJugador : MonoBehaviour
             animator.SetBool("Run", false);
             rb2D.velocity = new Vector2(0, rb2D.velocity.y);
         }
+
     }
 
     //Movimiento salto con transición de animaciones
@@ -75,7 +77,7 @@ public class MovimientoJugador : MonoBehaviour
             rb2D.velocity = new Vector2(rb2D.velocity.x, jumpSpeed);
         }
 
-        if (CheckGround.isGround == false)
+        if (!CheckGround.isGround)
         {
             animator.SetBool("Jump", true);
             animator.SetBool("Run", false);
@@ -113,6 +115,7 @@ public class MovimientoJugador : MonoBehaviour
         {
             speed = 3f;
             animator.SetBool("Crouch", true);
+            animator.SetBool("CrouchWalk", false);
             idleCollider.enabled = false;
             if (Input.GetKey("d"))
             {
