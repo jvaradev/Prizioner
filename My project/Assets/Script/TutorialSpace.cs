@@ -5,31 +5,31 @@ using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement; 
 
-public class TutorialS : MonoBehaviour
+public class TutorialSpace : MonoBehaviour
 {
     private Animator animatorKey;
-    private GameObject keySObject;
+    private GameObject keySpaceObject;
     private void Start()
     {
         // Encuentra el objeto "Square" en la escena
-        keySObject = GameObject.Find("KeyS");
+        keySpaceObject = GameObject.Find("KeySpace");
         // Asegúrate de que esté desactivado al principio
-        keySObject.SetActive(false);
+        keySpaceObject.SetActive(false);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        animatorKey = keySObject.GetComponentInChildren<Animator>();
+        animatorKey = keySpaceObject.GetComponentInChildren<Animator>();
         if (collision.CompareTag("Player"))
         {
-            keySObject.SetActive(true);
+            keySpaceObject.SetActive(true);
             animatorKey.SetBool("Enter", true);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        keySObject.SetActive(false);
+        keySpaceObject.SetActive(false);
         CheckGround.isGround = true;
     }
 

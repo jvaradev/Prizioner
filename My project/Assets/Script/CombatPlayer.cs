@@ -55,6 +55,8 @@ public class CombatPlayer : MonoBehaviour
         // Cambiar la posición después de la espera
         bc2D.transform.position = new Vector3(positionXRespawn, positionYRespawn);
         animator.SetBool("Death", false);
+        health = maxHealth;
+        healthBar.changeActualHealth(health);
         movimientoJugador.sePuedeMover = true;
     }
 }

@@ -72,7 +72,7 @@ public class MovimientoJugador : MonoBehaviour
     //Movimiento salto con transición de animaciones
     private void Jump()
     {
-        if (Input.GetKey("w") && CheckGround.isGround)
+        if (Input.GetKey("space") && CheckGround.isGround)
         {
             rb2D.velocity = new Vector2(rb2D.velocity.x, jumpSpeed);
         }
