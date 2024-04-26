@@ -1,3 +1,6 @@
+using Script;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class MovimientoJugador : MonoBehaviour
@@ -22,13 +25,14 @@ public class MovimientoJugador : MonoBehaviour
     public float distHead = 0.5f;
     public LayerMask capaPlataforma;
 
+    [SerializeField] private float climbSpeed = 3f;
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         bc2D = GetComponent<BoxCollider2D>();
-        
+
     }
 
     void FixedUpdate()
@@ -40,6 +44,7 @@ public class MovimientoJugador : MonoBehaviour
             Fall();
             Crouch();
             Jump();
+            Climb();
         }
     }
     
@@ -89,7 +94,6 @@ public class MovimientoJugador : MonoBehaviour
             animator.SetBool("Fall", false);
         }
     }
-
     //Movimiento de caer con animaciones
     private void Fall()
     {
@@ -100,6 +104,18 @@ public class MovimientoJugador : MonoBehaviour
         else
         {
             animator.SetBool("Fall", false);
+        }
+    }
+
+    private void Climb()
+    {
+        float getDirection = Input.GetAxis("Vertical");
+        if (CheckLadder.checkLadder)
+        {
+            if (Input.GetAxis("Vertical") != 0)
+            {
+                rb2D.velocity = new Vector2(rb2D.velocity.x, getDirection * climbSpeed);
+            }
         }
     }
 
@@ -135,7 +151,7 @@ public class MovimientoJugador : MonoBehaviour
             CheckHeadBlock();
         }
     }
-
+    
     private void CheckHeadBlock()
     {
         if (!headBlock)

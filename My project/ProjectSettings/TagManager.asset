@@ -6,6 +6,7 @@ TagManager:
   tags:
   - TileMap
   - Puerta
+  - Escalera
   layers:
   - Default
   - TransparentFX
@@ -13,7 +14,7 @@ TagManager:
   - Suelo
   - Water
   - UI
-  - 
+  - Escaleras
   - 
   - 
   - 
