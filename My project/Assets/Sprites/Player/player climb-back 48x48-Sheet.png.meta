@@ -111,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7969b756ea6f24a42944d661b2469900
-      internalID: -1696296164
+      spriteID: 3975e4dae59342249bfc3547332426c0
+      internalID: 1280643727
       vertices: []
       indices: 
       edges: []
@@ -132,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c194ffd4a90028945a7ce89f0582636c
-      internalID: -1350300209
+      spriteID: 5d995c6f675a4124bb7c6a9ac1b8497a
+      internalID: -2050431524
       vertices: []
       indices: 
       edges: []
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a689a57babdbf24593496ec4a79258e
-      internalID: -70970383
+      spriteID: a0dd3f4b09499ff429f64b9bd9883376
+      internalID: 1602275973
       vertices: []
       indices: 
       edges: []
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc20524e1eb21a946be5cc4746dfb29f
-      internalID: 93040952
+      spriteID: 23a05bc26b4099a49bb5ae5e1c09a212
+      internalID: 1299264368
       vertices: []
       indices: 
       edges: []
@@ -191,10 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      player climb-back 48x48-Sheet_0: -1696296164
-      player climb-back 48x48-Sheet_1: -1350300209
-      player climb-back 48x48-Sheet_2: -70970383
-      player climb-back 48x48-Sheet_3: 93040952
+      player climb-back 48x48-Sheet_0: 1280643727
+      player climb-back 48x48-Sheet_1: -2050431524
+      player climb-back 48x48-Sheet_2: 1602275973
+      player climb-back 48x48-Sheet_3: 1299264368
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

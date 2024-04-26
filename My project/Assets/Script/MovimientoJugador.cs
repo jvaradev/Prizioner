@@ -26,17 +26,19 @@ public class MovimientoJugador : MonoBehaviour
     public LayerMask capaPlataforma;
 
     [SerializeField] private float climbSpeed = 3f;
+    private float inicialGravity;
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         bc2D = GetComponent<BoxCollider2D>();
-
+        inicialGravity = rb2D.gravityScale;
     }
 
     void FixedUpdate()
     {
+        rb2D.gravityScale = inicialGravity;
         if (sePuedeMover)
         {
             CheckTop();
@@ -113,8 +115,16 @@ public class MovimientoJugador : MonoBehaviour
         if (CheckLadder.checkLadder)
         {
             if (Input.GetAxis("Vertical") != 0)
-            {
+            {                
+                animator.SetBool("IdleClimb", false);
                 rb2D.velocity = new Vector2(rb2D.velocity.x, getDirection * climbSpeed);
+            }
+
+            if (Input.GetAxis("Vertical") == 0)
+            {
+                animator.SetBool("IdleClimb", true);
+                rb2D.gravityScale = 0;
+                rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
             }
         }
     }

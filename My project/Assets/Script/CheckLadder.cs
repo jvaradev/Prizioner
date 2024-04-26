@@ -22,6 +22,7 @@ namespace Script
         private void OnTriggerExit2D(Collider2D collision)
         {
             animatorPlayer.SetBool("Climb", false);
+            animatorPlayer.SetBool("IdleClimb", false);
             checkLadder = false;
             CheckGround.isGround = true;
         }
