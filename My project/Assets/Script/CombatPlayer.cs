@@ -39,6 +39,19 @@ public class CombatPlayer : MonoBehaviour
             StartCoroutine(EsperarAntesDeCambiarPosicion());
         }
     }
+    public void GetDamage(float damage)
+    {
+        health -= damage;
+        healthBar.changeActualHealth(health);
+        StartCoroutine(PerderControl());
+        if (health <= 0)
+        {
+            bc2D = GetComponent<BoxCollider2D>();
+            animator.SetBool("Death", true);
+            // Espera unos segundos antes de cambiar de posición
+            StartCoroutine(EsperarAntesDeCambiarPosicion());
+        }
+    }
     
     private IEnumerator PerderControl()
     {
@@ -59,4 +72,5 @@ public class CombatPlayer : MonoBehaviour
         healthBar.changeActualHealth(health);
         movimientoJugador.sePuedeMover = true;
     }
+
 }

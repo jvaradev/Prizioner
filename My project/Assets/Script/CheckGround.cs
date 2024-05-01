@@ -16,4 +16,5 @@ public class CheckGround : MonoBehaviour
     {
         isGround = false;
     }
+    
 }

@@ -9,6 +9,7 @@ public class TutorialSpace : MonoBehaviour
 {
     private Animator animatorKey;
     private GameObject keySpaceObject;
+    private GameObject player;
     private void Start()
     {
         // Encuentra el objeto "Square" en la escena
@@ -17,7 +18,7 @@ public class TutorialSpace : MonoBehaviour
         keySpaceObject.SetActive(false);
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void On(Collider2D collision)
     {
         animatorKey = keySpaceObject.GetComponentInChildren<Animator>();
         if (collision.CompareTag("Player"))
