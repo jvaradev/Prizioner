@@ -53,6 +53,11 @@ public class CombatPlayer : MonoBehaviour
         }
     }
     
+    public float GetHealth()
+    {
+        return health;
+    }
+    
     private IEnumerator PerderControl()
     {
         movimientoJugador.sePuedeMover = false;

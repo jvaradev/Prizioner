@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 54adbfad11eb8e746ab5f6d1ee781582
+guid: e304e5e492e8a2547976117d0a07007e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
     textureCompression: 2
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player Punch 64x64-Sheet_0
+      name: Zombie Death 64x64-Sheet_0
       rect:
         serializedVersion: 2
-        x: 20
-        y: 16
-        width: 17
-        height: 30
+        x: 6
+        y: 8
+        width: 18
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,146 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dbec8fabb6bd3ff468573d95a2c6a1f9
-      internalID: 1426184950
+      spriteID: 3b28d0e7f6f26634e8a750bb6c7afde8
+      internalID: -298388520
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player Punch 64x64-Sheet_1
+      name: Zombie Death 64x64-Sheet_1
       rect:
         serializedVersion: 2
-        x: 81
-        y: 16
-        width: 20
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 18cac644c1657c343b51ac0f43e17d3a
-      internalID: 891260962
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player Punch 64x64-Sheet_2
-      rect:
-        serializedVersion: 2
-        x: 145
-        y: 16
-        width: 20
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ce6a41e351b5b2c4490ea7f21befec82
-      internalID: -1925193988
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player Punch 64x64-Sheet_3
-      rect:
-        serializedVersion: 2
-        x: 210
-        y: 16
-        width: 19
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 90730469ae5fe5648a54ef5f153a14a0
-      internalID: 184454830
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player Punch 64x64-Sheet_4
-      rect:
-        serializedVersion: 2
-        x: 279
-        y: 16
-        width: 41
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7a2132b441672db41872782d084de4bb
-      internalID: 825585466
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player Punch 64x64-Sheet_5
-      rect:
-        serializedVersion: 2
-        x: 353
-        y: 16
-        width: 29
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3be66949ae5a1014da42d5a2c150ad59
-      internalID: -128815112
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player Punch 64x64-Sheet_6
-      rect:
-        serializedVersion: 2
-        x: 418
-        y: 16
-        width: 20
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a7233c709c3469d4f91a6ed808d0b9a4
-      internalID: 892681632
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player Punch 64x64-Sheet_7
-      rect:
-        serializedVersion: 2
-        x: 479
-        y: 16
+        x: 58
+        y: 8
         width: 13
-        height: 30
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,8 +132,176 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a86666f59049e6248a6b77868c5dc521
-      internalID: 53983283
+      spriteID: 89192c32fb3ca3b48acfba5435fcbc68
+      internalID: -958456828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zombie Death 64x64-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 8
+        width: 12
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60ad1d1730c44d143947ae4ad868fb6a
+      internalID: -702535873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zombie Death 64x64-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 8
+        width: 14
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4c57b33be60aad4185e6aa090973590
+      internalID: -1249109999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zombie Death 64x64-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 8
+        width: 14
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1949c985e8a2d54082831497631991d
+      internalID: -283609957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zombie Death 64x64-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 8
+        width: 14
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3044f6dc8fd8a074fb175f6606d44499
+      internalID: -1141632100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zombie Death 64x64-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 8
+        width: 25
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0033e34a6e72f9e42bfe860ee65f1c2e
+      internalID: 647847682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zombie Death 64x64-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 8
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62e6e81395480cd488800150a3beb731
+      internalID: -169494051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zombie Death 64x64-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 8
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f0a928652682744db9586dfd7b3984d
+      internalID: -590342329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zombie Death 64x64-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 8
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54e182c302c20e7429eac7f1b7de0485
+      internalID: 491745096
       vertices: []
       indices: 
       edges: []
@@ -275,14 +317,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player Punch 64x64-Sheet_0: 1426184950
-      Player Punch 64x64-Sheet_1: 891260962
-      Player Punch 64x64-Sheet_2: -1925193988
-      Player Punch 64x64-Sheet_3: 184454830
-      Player Punch 64x64-Sheet_4: 825585466
-      Player Punch 64x64-Sheet_5: -128815112
-      Player Punch 64x64-Sheet_6: 892681632
-      Player Punch 64x64-Sheet_7: 53983283
+      Zombie Death 64x64-Sheet_0: -298388520
+      Zombie Death 64x64-Sheet_1: -958456828
+      Zombie Death 64x64-Sheet_2: -702535873
+      Zombie Death 64x64-Sheet_3: -1249109999
+      Zombie Death 64x64-Sheet_4: -283609957
+      Zombie Death 64x64-Sheet_5: -1141632100
+      Zombie Death 64x64-Sheet_6: 647847682
+      Zombie Death 64x64-Sheet_7: -169494051
+      Zombie Death 64x64-Sheet_8: -590342329
+      Zombie Death 64x64-Sheet_9: 491745096
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
