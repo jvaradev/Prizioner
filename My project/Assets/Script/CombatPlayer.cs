@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,13 +24,21 @@ public class CombatPlayer : MonoBehaviour
         healthBar.inicialiteActualHealth(health);
     }
 
+    private void Update()
+    {
+        if (Input.GetButton("Fire1"))
+        {
+            StartCoroutine(PerderControl(1f));
+        }
+    }
+
     // Update is called once per frame
     
     public void GetDamage(float damage, Vector2 posicion)
     {
         health -= damage;
         healthBar.changeActualHealth(health);
-        StartCoroutine(PerderControl());
+        StartCoroutine(PerderControl(tiempoPerdida));
         movimientoJugador.Rebote(posicion);
         if (health <= 0)
         {
@@ -43,7 +52,7 @@ public class CombatPlayer : MonoBehaviour
     {
         health -= damage;
         healthBar.changeActualHealth(health);
-        StartCoroutine(PerderControl());
+        StartCoroutine(PerderControl(tiempoPerdida));
         if (health <= 0)
         {
             bc2D = GetComponent<BoxCollider2D>();
@@ -58,7 +67,7 @@ public class CombatPlayer : MonoBehaviour
         return health;
     }
     
-    private IEnumerator PerderControl()
+    private IEnumerator PerderControl(float tiempoPerdida)
     {
         movimientoJugador.sePuedeMover = false;
         yield return new WaitForSeconds(tiempoPerdida);
