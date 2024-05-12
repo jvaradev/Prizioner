@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Script;
 using UnityEngine;
 
 public class CombatMelee : MonoBehaviour
@@ -10,15 +8,41 @@ public class CombatMelee : MonoBehaviour
     [SerializeField] private Transform controller2;
     [SerializeField] private float radioHit;
     [SerializeField] private float damage;
+    private Rigidbody2D rb2D;
     public Animator animator;
+    private bool isAttacking = false;
+
+    private void Start()
+    {
+        rb2D = GetComponent<Rigidbody2D>();
+    }
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (!isAttacking && Input.GetButtonDown("Fire1"))
         {
             animator.SetTrigger("Punch");
-            Punch();
+            animator.SetBool("Run",false);
+            isAttacking = true; // El personaje está atacando
+            StartCoroutine(PerformAttack());
         }
+    }
+
+    private IEnumerator PerformAttack()
+    {
+        Punch(); // Realizar el ataque
+
+        // Congelar la posición durante el ataque
+        rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
+
+        // Esperar hasta que termine la animación de ataque
+        yield return new WaitForSeconds(0f);
+
+        // Descongelar la posición después del ataque
+        rb2D.constraints = RigidbodyConstraints2D.None;
+        rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        isAttacking = false; // El personaje ha terminado de atacar
     }
 
     private void Punch()

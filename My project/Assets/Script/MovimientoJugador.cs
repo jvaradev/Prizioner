@@ -111,6 +111,8 @@ public class MovimientoJugador : MonoBehaviour
 
     private void Climb()
     {
+        bc2D.isTrigger = true;
+        crouchCollider.isTrigger = true;
         float getDirection = Input.GetAxis("Vertical");
         if (CheckLadder.checkLadder)
         {
@@ -126,6 +128,12 @@ public class MovimientoJugador : MonoBehaviour
                 rb2D.gravityScale = 0;
                 rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
             }
+        }
+
+        if (!CheckLadder.checkLadder)
+        {
+            bc2D.isTrigger = false;
+            crouchCollider.isTrigger = false;
         }
     }
 

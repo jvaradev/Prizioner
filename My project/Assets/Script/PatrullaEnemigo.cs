@@ -16,6 +16,7 @@ public class PatrullaEnemigo : MonoBehaviour
     [SerializeField] private float distanciaMinima;
     [SerializeField] public float damage;
     private int numAlt;
+    private BoxCollider2D bc2D;
     private SpriteRenderer sr;
     private Animator animator;
     private bool isDead = false; // Variable para controlar si el enemigo está muerto
@@ -27,6 +28,7 @@ public class PatrullaEnemigo : MonoBehaviour
         numAlt = Random.Range(0, puntos.Length);
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        bc2D = GetComponent<BoxCollider2D>();
         Girar();
     }
 
@@ -73,7 +75,9 @@ public class PatrullaEnemigo : MonoBehaviour
     {
         isDead = true; // Marcar al enemigo como muerto para detener su movimiento
         animator.SetBool("Dead", true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.75f);
+        sr.enabled = false;
+        bc2D.enabled = false;
         animator.SetBool("Dead", false);
         animator.SetBool("Finish", true);
     }

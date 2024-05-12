@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 718c84981864a89468c498c5672bd136
+guid: 967b7380157a552458fc973932c27a58
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,85 +97,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player climb-back 48x48-Sheet_0
+      name: TobacoAnim_0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 6
-        width: 13
-        height: 33
+        x: 0
+        y: 0
+        width: 40
+        height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3975e4dae59342249bfc3547332426c0
-      internalID: 1280643727
+      spriteID: 3e6fbdea970646a48b6f8b7ef65b2b45
+      internalID: 2120834601
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player climb-back 48x48-Sheet_1
+      name: TobacoAnim_1
       rect:
         serializedVersion: 2
-        x: 63
-        y: 6
-        width: 16
-        height: 33
+        x: 40
+        y: 0
+        width: 40
+        height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d995c6f675a4124bb7c6a9ac1b8497a
-      internalID: -2050431524
+      spriteID: ab046ba705ffc834a8a9df59cfac9a57
+      internalID: -324777588
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player climb-back 48x48-Sheet_2
+      name: TobacoAnim_2
       rect:
         serializedVersion: 2
-        x: 114
-        y: 6
-        width: 12
-        height: 33
+        x: 80
+        y: 0
+        width: 40
+        height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0dd3f4b09499ff429f64b9bd9883376
-      internalID: 1602275973
+      spriteID: d088dc65f0a46d149899a8dc4a6f6ac2
+      internalID: -237733345
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player climb-back 48x48-Sheet_3
+      name: TobacoAnim_3
       rect:
         serializedVersion: 2
-        x: 159
-        y: 6
-        width: 16
-        height: 33
+        x: 120
+        y: 0
+        width: 40
+        height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23a05bc26b4099a49bb5ae5e1c09a212
-      internalID: 1299264368
+      spriteID: 61928f756b993e24b9dd7dde29c3cf03
+      internalID: -190036763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TobacoAnim_4
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ef2083853d066a46afe67f8a3b08325
+      internalID: -1358976588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TobacoAnim_5
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07818514500a0ff479e664177d08defe
+      internalID: -1105050311
       vertices: []
       indices: 
       edges: []
@@ -191,10 +233,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      player climb-back 48x48-Sheet_0: 1280643727
-      player climb-back 48x48-Sheet_1: -2050431524
-      player climb-back 48x48-Sheet_2: 1602275973
-      player climb-back 48x48-Sheet_3: 1299264368
+      TobacoAnim_0: 2120834601
+      TobacoAnim_1: -324777588
+      TobacoAnim_2: -237733345
+      TobacoAnim_3: -190036763
+      TobacoAnim_4: -1358976588
+      TobacoAnim_5: -1105050311
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

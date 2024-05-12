@@ -18,7 +18,7 @@ public class TutorialSpace : MonoBehaviour
         keySpaceObject.SetActive(false);
     }
 
-    private void On(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         animatorKey = keySpaceObject.GetComponentInChildren<Animator>();
         if (collision.CompareTag("Player"))
