@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CombatPlayer : MonoBehaviour
 {
@@ -78,7 +79,9 @@ public class CombatPlayer : MonoBehaviour
     {
         movimientoJugador.sePuedeMover = false;
         // Espera unos segundos después de la muerte
-        yield return new WaitForSeconds(2.0f); // Cambia este valor según lo que necesites
+        yield return new WaitForSeconds(2.0f);
+        CheckGround.isGround = true;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         // Cambiar la posición después de la espera
         bc2D.transform.position = new Vector3(positionXRespawn, positionYRespawn);
         animator.SetBool("Death", false);
