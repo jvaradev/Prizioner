@@ -59,6 +59,7 @@ public class CombatPlayer : MonoBehaviour
         {
             bc2D = GetComponent<BoxCollider2D>();
             animator.SetBool("Death", true);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             // Espera unos segundos antes de cambiar de posición
             StartCoroutine(EsperarAntesDeCambiarPosicion());
         }
@@ -92,7 +93,6 @@ public class CombatPlayer : MonoBehaviour
         // Espera unos segundos después de la muerte
         yield return new WaitForSeconds(2.0f);
         CheckGround.isGround = true;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         // Cambiar la posición después de la espera
         bc2D.transform.position = new Vector3(positionXRespawn, positionYRespawn);
         animator.SetBool("Death", false);
