@@ -1,22 +1,20 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CombatPlayer : MonoBehaviour
 {
-    [SerializeField] public float positionXRespawn;
-    [SerializeField] public float positionYRespawn;
+    [SerializeField] private float positionXRespawn;
+    [SerializeField] private float positionYRespawn;
     private float health;
     public static float maxHealth = 100;
-    [SerializeField]private HealthBar healthBar;
+    [SerializeField] private HealthBar healthBar;
     private MovimientoJugador movimientoJugador;
     [SerializeField] private float tiempoPerdida;
     private Animator animator;
     private BoxCollider2D bc2D;
-    
-    // Start is called before the first frame update
+    private bool canCure = true; // Añadido para controlar si se puede curar
+
     private void Start()
     {
         movimientoJugador = GetComponent<MovimientoJugador>();
@@ -31,10 +29,12 @@ public class CombatPlayer : MonoBehaviour
         {
             StartCoroutine(PerderControl(1f));
         }
+        if (canCure && Input.GetKey("q") && CountCigarrete.count > 0) // Añadido para controlar la curación
+        {
+            Cure();
+        }
     }
 
-    // Update is called once per frame
-    
     public void GetDamage(float damage, Vector2 posicion)
     {
         health -= damage;
@@ -49,6 +49,7 @@ public class CombatPlayer : MonoBehaviour
             StartCoroutine(EsperarAntesDeCambiarPosicion());
         }
     }
+
     public void GetDamage(float damage)
     {
         health -= damage;
@@ -62,12 +63,22 @@ public class CombatPlayer : MonoBehaviour
             StartCoroutine(EsperarAntesDeCambiarPosicion());
         }
     }
-    
+
+    public void Cure()
+    {
+        health += 10;
+        CountCigarrete.count -= 1; // Resta 1 a la cantidad de cigarrillos
+        health = Mathf.Clamp(health, 0, maxHealth); // Limita la salud al máximo de salud
+        healthBar.changeActualHealth(health);
+        canCure = false; // Desactiva la capacidad de curación temporalmente
+        StartCoroutine(ReactivateCure()); // Reactiva la capacidad de curación después de un tiempo
+    }
+
     public float GetHealth()
     {
         return health;
     }
-    
+
     private IEnumerator PerderControl(float tiempoPerdida)
     {
         movimientoJugador.sePuedeMover = false;
@@ -90,4 +101,9 @@ public class CombatPlayer : MonoBehaviour
         movimientoJugador.sePuedeMover = true;
     }
 
+    private IEnumerator ReactivateCure()
+    {
+        yield return new WaitForSeconds(1f); // Tiempo de espera antes de reactivar la curación
+        canCure = true;
+    }
 }

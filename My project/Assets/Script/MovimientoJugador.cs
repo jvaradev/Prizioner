@@ -136,6 +136,7 @@ public class MovimientoJugador : MonoBehaviour
             crouchCollider.isTrigger = false;
         }
     }
+    
 
     public void Rebote(Vector2 puntoGolpe)
     {

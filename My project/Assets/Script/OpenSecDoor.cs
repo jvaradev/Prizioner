@@ -27,15 +27,16 @@ public class OpenSecDoor : MonoBehaviour
         animatorKey = squareObject.GetComponentInChildren<Animator>();
         if (collision.CompareTag("Player"))
         {
+            animator.SetBool("Interact", true);
             squareObject.SetActive(true);
             squareObject.transform.localScale = new Vector2(4, 4);
             animatorKey.SetBool("Start", true);
-            stayDoor = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        animator.SetBool("Interact", false);
         squareObject.SetActive(false);
         stayDoor = false;
         CheckGround.isGround = true;
@@ -43,9 +44,8 @@ public class OpenSecDoor : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey("e") && !sceneChanged && stayDoor)
+        if (Input.GetKey("e") && !sceneChanged)
         {
-            Debug.Log("Tecla E presionada");
             animator.SetBool("Open", true);
             StartCoroutine(TiempoAbrirPuerta());
         }

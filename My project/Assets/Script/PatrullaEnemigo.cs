@@ -80,6 +80,7 @@ public class PatrullaEnemigo : MonoBehaviour
         bc2D.enabled = false;
         animator.SetBool("Dead", false);
         animator.SetBool("Finish", true);
+        Destroy(gameObject);
     }
     
     private IEnumerator Hurt()
