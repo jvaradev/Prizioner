@@ -44,9 +44,8 @@ public class CombatPlayer : MonoBehaviour
         if (health <= 0)
         {
             bc2D = GetComponent<BoxCollider2D>();
-            animator.SetBool("Death", true);
-            // Espera unos segundos antes de cambiar de posición
-            StartCoroutine(EsperarAntesDeCambiarPosicion());
+            animator.SetBool("Death",true);
+            StartCoroutine(HandleDeath());
         }
     }
 
@@ -58,19 +57,20 @@ public class CombatPlayer : MonoBehaviour
         if (health <= 0)
         {
             bc2D = GetComponent<BoxCollider2D>();
-            animator.SetBool("Death", true);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            // Espera unos segundos antes de cambiar de posición
-            StartCoroutine(EsperarAntesDeCambiarPosicion());
+            animator.SetBool("Death",true);
+            StartCoroutine(HandleDeath());
         }
     }
 
     public void Cure()
     {
-        health += 10;
-        CountCigarrete.count -= 1; // Resta 1 a la cantidad de cigarrillos
-        health = Mathf.Clamp(health, 0, maxHealth); // Limita la salud al máximo de salud
-        healthBar.changeActualHealth(health);
+        if (health < maxHealth)
+        {
+            health += 10;
+            CountCigarrete.count -= 1; // Resta 1 a la cantidad de cigarrillos
+            health = Mathf.Clamp(health, 0, maxHealth); // Limita la salud al máximo de salud
+            healthBar.changeActualHealth(health);
+        }
         canCure = false; // Desactiva la capacidad de curación temporalmente
         StartCoroutine(ReactivateCure()); // Reactiva la capacidad de curación después de un tiempo
     }
@@ -87,18 +87,26 @@ public class CombatPlayer : MonoBehaviour
         movimientoJugador.sePuedeMover = true;
     }
 
-    private IEnumerator EsperarAntesDeCambiarPosicion()
+    private IEnumerator HandleDeath()
     {
         movimientoJugador.sePuedeMover = false;
         // Espera unos segundos después de la muerte
         yield return new WaitForSeconds(2.0f);
+        ResetCounters();
         CheckGround.isGround = true;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         // Cambiar la posición después de la espera
         bc2D.transform.position = new Vector3(positionXRespawn, positionYRespawn);
         animator.SetBool("Death", false);
         health = maxHealth;
         healthBar.changeActualHealth(health);
         movimientoJugador.sePuedeMover = true;
+    }
+
+    private void ResetCounters()
+    {
+        CountCard.count = 0;
+        CountCigarrete.count = 0;
     }
 
     private IEnumerator ReactivateCure()

@@ -23,14 +23,11 @@ public class CountCard : MonoBehaviour
         if (count > 0)
         {
             card.enabled = true;
-            textMesh.enabled = true;
-            textMesh.text = count.ToString();
         }
 
         if (count <= 0)
         {
             card.enabled = false;
-            textMesh.enabled = false;
         }
     }
 
