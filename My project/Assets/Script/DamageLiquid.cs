@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+//Código para líquidos que infligen daño
 public class DamageLiquid : MonoBehaviour
 {
-    [SerializeField] private float damage = 10f; // Daño a infligir al jugador
-    private bool isWaiting = false; // Variable para controlar si se está esperando
+    [SerializeField] private float damage = 10f;
+    private bool isWaiting = false; 
     private bool isPlayerInContact = false;
 
     // Cuando otro collider permanece en contacto con este collider...
@@ -27,16 +28,15 @@ public class DamageLiquid : MonoBehaviour
     }
 
     // Método para aplicar el daño repetidamente mientras esté en contacto
-    // ReSharper disable Unity.PerformanceAnalysis
     private IEnumerator ApplyDamageRepeatedly(CombatPlayer player)
     {
         while (isPlayerInContact)
         {
-            isWaiting = true; // Marcamos que estamos esperando
-            player.GetDamage(damage); // Aplicamos el daño al jugador
+            isWaiting = true; 
+            player.GetDamage(damage);
             player.transform.GetComponent<PlayerRespawn>().PlayerDamaged();
-            yield return new WaitForSeconds(1f); // Esperamos un segundo
-            isWaiting = false; // Marcamos que ya no estamos esperando
+            yield return new WaitForSeconds(1f); 
+            isWaiting = false; 
         }
     }
 

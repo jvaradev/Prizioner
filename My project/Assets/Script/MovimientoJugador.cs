@@ -1,34 +1,36 @@
-using Script;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
+//Código para controlar el movimiento del jugador
 public class MovimientoJugador : MonoBehaviour
 {
-    public float speed = 5f;
-    public float jumpSpeed = 6f;
-    public bool rayCast = true;
-    private Rigidbody2D rb2D;
-    public Animator animator;
-    private SpriteRenderer spriteRenderer;
-    private BoxCollider2D bc2D;
-    private Vector2 originalColliderSize; // Almacena el tamaño original del collider
-    private Vector2 originalColliderOffset; // Almacena el desplazamiento original del collider
-    public bool sePuedeMover = true;
-    [SerializeField] private Vector2 velocidadRebote;
+    // Variables públicas ajustables desde el editor
+    public float speed = 5f; // Velocidad de movimiento
+    public float jumpSpeed = 6f; // Velocidad de salto
+    public bool rayCast = true; // Activar o desactivar raycast
+    private Rigidbody2D rb2D; // Referencia al componente Rigidbody2D
+    public Animator animator; // Referencia al componente Animator
+    private SpriteRenderer spriteRenderer; // Referencia al componente SpriteRenderer
+    private BoxCollider2D bc2D; // Referencia al componente BoxCollider2D
+    private Vector2 originalColliderSize; // Tamaño original del collider
+    private Vector2 originalColliderOffset; // Desplazamiento original del collider
+    public bool sePuedeMover = true; // Determina si el jugador puede moverse
+    [SerializeField] private Vector2 velocidadRebote; // Velocidad de rebote tras un golpe
 
-    public bool headBlock;
-    [SerializeField] private BoxCollider2D crouchCollider;
-    private Vector2 offsetCrouch;
-    [SerializeField] private BoxCollider2D idleCollider;
-    private Vector2 offsetIdle;
-    public float distHead = 0.5f;
-    public LayerMask capaPlataforma;
+    public bool headBlock; // Bloqueo de la cabeza del jugador
+    [SerializeField] private BoxCollider2D crouchCollider; // Collider para cuando el jugador está agachado
+    private Vector2 offsetCrouch; // Desplazamiento del collider cuando está agachado
+    [SerializeField] private BoxCollider2D idleCollider; // Collider para cuando el jugador está de pie
+    private Vector2 offsetIdle; // Desplazamiento del collider cuando está de pie
+    public float distHead = 0.5f; // Distancia para detectar bloqueo en la cabeza
+    public LayerMask capaPlataforma; // Capa de la plataforma para detectar colisiones
 
-    [SerializeField] private float climbSpeed = 3f;
-    private float inicialGravity;
+    [SerializeField] private float climbSpeed = 3f; // Velocidad de trepar
+    private float inicialGravity; // Gravedad inicial del Rigidbody2D
+
     void Start()
     {
+        // Inicializa las referencias a los componentes necesarios y almacena la gravedad inicial
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -38,20 +40,20 @@ public class MovimientoJugador : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Llama a los métodos de movimiento si el jugador puede moverse
         rb2D.gravityScale = inicialGravity;
         if (sePuedeMover)
         {
-            CheckTop();
-            Movement();
-            Fall();
-            Crouch();
-            Jump();
-            Climb();
+            CheckTop(); // Comprueba si hay un obstáculo encima del jugador
+            Movement(); // Maneja el movimiento horizontal
+            Fall(); // Maneja la animación de caída
+            Crouch(); // Maneja el estado de agacharse
+            Jump(); // Maneja el salto
+            Climb(); // Maneja la escalada
         }
     }
     
-    
-    //Movimiento horizontal con animaciones
+    // Maneja el movimiento horizontal del jugador y las animaciones correspondientes
     private void Movement()
     {
         if (Input.GetKey("d") || Input.GetKey("right"))
@@ -76,7 +78,7 @@ public class MovimientoJugador : MonoBehaviour
 
     }
 
-    //Movimiento salto con transición de animaciones
+    // Maneja el salto del jugador y las transiciones de animaciones de salto
     private void Jump()
     {
         if (Input.GetKey("space") && CheckGround.isGround)
@@ -96,7 +98,8 @@ public class MovimientoJugador : MonoBehaviour
             animator.SetBool("Fall", false);
         }
     }
-    //Movimiento de caer con animaciones
+    
+    // Maneja la animación de caída cuando el jugador no está en el suelo
     private void Fall()
     {
         if (!CheckGround.isGround && rb2D.velocity.y < 0)
@@ -109,6 +112,7 @@ public class MovimientoJugador : MonoBehaviour
         }
     }
 
+    // Maneja el movimiento de trepar cuando el jugador está en una escalera
     private void Climb()
     {
         bc2D.isTrigger = true;
@@ -137,13 +141,13 @@ public class MovimientoJugador : MonoBehaviour
         }
     }
     
-
+    // Aplica una fuerza de rebote al jugador tras un golpe
     public void Rebote(Vector2 puntoGolpe)
     {
         rb2D.velocity = new Vector2(-velocidadRebote.x * puntoGolpe.x, velocidadRebote.y);
     }
 
-    //posiblemente tenga que separar en Crouch y CrouchWalk
+    // Maneja el estado de agacharse del jugador y activa las animaciones correspondiente
     public void Crouch()
     {
         if (Input.GetKey("s") && CheckGround.isGround)
@@ -171,6 +175,7 @@ public class MovimientoJugador : MonoBehaviour
         }
     }
     
+    // Comprueba si hay un bloqueo en la cabeza del jugador utilizando raycasting
     private void CheckHeadBlock()
     {
         if (!headBlock)
@@ -194,6 +199,7 @@ public class MovimientoJugador : MonoBehaviour
         }
     }
 
+    // Realiza un raycast hacia arriba desde la posición del jugador para detectar si hay una plataforma encima
     void CheckTop()
     {
         Vector2 pos = transform.position;

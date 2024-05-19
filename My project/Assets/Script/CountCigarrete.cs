@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+//Código para contar los cigarrilos que recoge en el nivel el jugador
 public class CountCigarrete : MonoBehaviour
 {
     public static float count;
@@ -20,6 +21,7 @@ public class CountCigarrete : MonoBehaviour
         circle.enabled = false;
     }
 
+    //Si el jugador recoge cigarrillo se mostrará el icono en la interfaz de usuario y la cantidad que tiene.
     private void Update()
     {
         if (count > 0)
@@ -38,6 +40,7 @@ public class CountCigarrete : MonoBehaviour
         }
     }
 
+    //Aumentar conteo de cigarrillos
     public void AddCount(float addNum)
     {
         count += addNum;

@@ -2,21 +2,39 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//Código que controla el combate del Jugador. Ataque, Respawn y Sistema de Vida.
 public class CombatPlayer : MonoBehaviour
 {
+    //Variables para la posicion en X e Y del Respawn del jugador.
     [SerializeField] private float positionXRespawn;
     [SerializeField] private float positionYRespawn;
+    
+    //Variables para poder controlar el sistema de vida.
+    [SerializeField] private HealthBar healthBar;
+    private bool canCure = true; // Añadido para controlar si se puede curar
     private float health;
     public static float maxHealth = 100;
-    [SerializeField] private HealthBar healthBar;
-    private MovimientoJugador movimientoJugador;
+    
+    //Variable para que el jugadro no pueda moverse al recibir daño.
     [SerializeField] private float tiempoPerdida;
+    
+    //Variables para controlar el sistema de ataque
+    [SerializeField] private Transform controller;
+    [SerializeField] private Transform controller2;
+    [SerializeField] private float radioHit;
+    [SerializeField] private float damage;
+    private bool isAttacking = false;
+    
+    //Variables para controlar al jugador.
+    private Rigidbody2D rb2D;
     private Animator animator;
     private BoxCollider2D bc2D;
-    private bool canCure = true; // Añadido para controlar si se puede curar
-
+    private MovimientoJugador movimientoJugador;
+    
+    //Llamar a los componentes
     private void Start()
     {
+        rb2D = GetComponent<Rigidbody2D>();
         movimientoJugador = GetComponent<MovimientoJugador>();
         animator = GetComponent<Animator>();
         health = maxHealth;
@@ -25,16 +43,46 @@ public class CombatPlayer : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButton("Fire1"))
+        //Verificar si no está atacando y se pulsa la tecla asignada a Fire1 (Click izquierdo ratón)
+        if (!isAttacking &&Input.GetButton("Fire1"))
         {
+            //Cambio parametros para comenzar animación "Punch"
+            animator.SetTrigger("Punch");
+            animator.SetBool("Run",false);
+            isAttacking = true; // El personaje está atacando
+            StartCoroutine(PerformAttack());
             StartCoroutine(PerderControl(1f));
         }
+        //Verificar si puede cuarase el jugador, pulsa la letra Q y tiene objetos de cura
         if (canCure && Input.GetKey("q") && CountCigarrete.count > 0) // Añadido para controlar la curación
         {
             Cure();
         }
     }
+    
+    //Código de realización de ataque
+    private void Punch()
+    {
+        //Collider de la círculos de acción del ataque.
+        Collider2D[] objets = Physics2D.OverlapCircleAll(controller.position, radioHit);
+        Collider2D[] objets2 = Physics2D.OverlapCircleAll(controller2.position, radioHit);
 
+        //Cada Enemy que se encuentre dentro de cada círculo de acción recibe daño.
+        foreach (Collider2D collider in objets)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                collider.transform.GetComponent<PatrullaEnemigo>().GetDamage(damage);
+            }
+        }
+        foreach (Collider2D collider in objets2)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                collider.transform.GetComponent<PatrullaEnemigo>().GetDamage(damage);
+            }
+        }
+    }
     public void GetDamage(float damage, Vector2 posicion)
     {
         health -= damage;
@@ -113,5 +161,31 @@ public class CombatPlayer : MonoBehaviour
     {
         yield return new WaitForSeconds(1f); // Tiempo de espera antes de reactivar la curación
         canCure = true;
+    }
+    
+    //Corrutina para realizar ataque
+    private IEnumerator PerformAttack()
+    {
+        Punch(); // Realizar el ataque
+
+        // Congelar la posición durante el ataque
+        rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
+
+        // Esperar hasta que termine la animación de ataque
+        yield return new WaitForSeconds(1f);
+
+        // Descongelar la posición después del ataque
+        rb2D.constraints = RigidbodyConstraints2D.None;
+        rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        isAttacking = false; // El personaje ha terminado de atacar
+    }
+    
+    //Método para dibujar los círculos de acción. Para poder visualizar su funcionamiento. Solo aparece en consola.
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(controller.position, radioHit);
+        Gizmos.DrawWireSphere(controller2.position, radioHit);
     }
 }
