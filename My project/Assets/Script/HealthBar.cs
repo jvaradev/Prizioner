@@ -15,21 +15,21 @@ public class HealthBar : MonoBehaviour
     }
 
     //Cambiar el slider según la vida máxima
-    public void changeMaxHealth(float maxHealth)
+    public void ChangeMaxHealth(float maxHealth)
     {
         slider.maxValue = maxHealth;
     }
     
     //Cambiar el slider según la vida que tenga el jugador
-    public void changeActualHealth(float cantHealth)
+    public void ChangeActualHealth(float cantHealth)
     {
         slider.value = cantHealth;
     }
     
     //Iniciar la barra de vida con la vida que tiene el jugador
-    public void inicialiteActualHealth(float cantHealth)
+    public void InicialiteActualHealth(float cantHealth)
     {
-        changeMaxHealth(cantHealth);
-        changeActualHealth(cantHealth);
+        ChangeMaxHealth(cantHealth);
+        ChangeActualHealth(cantHealth);
     }
 }

@@ -8,6 +8,8 @@ TagManager:
   - Puerta
   - Escalera
   - Enemy
+  - Water
+  - Boss
   layers:
   - Default
   - TransparentFX

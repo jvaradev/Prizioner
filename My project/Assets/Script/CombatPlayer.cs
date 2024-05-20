@@ -38,19 +38,29 @@ public class CombatPlayer : MonoBehaviour
         movimientoJugador = GetComponent<MovimientoJugador>();
         animator = GetComponent<Animator>();
         health = maxHealth;
-        healthBar.inicialiteActualHealth(health);
+        healthBar.InicialiteActualHealth(health);
     }
 
     private void Update()
     {
         //Verificar si no está atacando y se pulsa la tecla asignada a Fire1 (Click izquierdo ratón)
-        if (!isAttacking &&Input.GetButton("Fire1"))
+        if (!isAttacking &&Input.GetButton("Fire1") && !HaveBar.haveBar)
         {
             //Cambio parametros para comenzar animación "Punch"
             animator.SetTrigger("Punch");
             animator.SetBool("Run",false);
             isAttacking = true; // El personaje está atacando
             StartCoroutine(PerformAttack());
+            StartCoroutine(PerderControl(1f));
+        }
+        
+        if (!isAttacking &&Input.GetButton("Fire1") && HaveBar.haveBar)
+        {
+            //Cambio parametros para comenzar animación "Punch"
+            animator.SetTrigger("HeavyAttack");
+            animator.SetBool("Run",false);
+            isAttacking = true; // El personaje está atacando
+            StartCoroutine(PerformHeavyAttack());
             StartCoroutine(PerderControl(1f));
         }
         //Verificar si puede cuarase el jugador, pulsa la letra Q y tiene objetos de cura
@@ -74,6 +84,10 @@ public class CombatPlayer : MonoBehaviour
             {
                 collider.transform.GetComponent<PatrullaEnemigo>().GetDamage(damage);
             }
+            if (collider.CompareTag("Boss"))
+            {
+                collider.transform.GetComponent<Boss>().GetDamage(damage);
+            }
         }
         foreach (Collider2D collider in objets2)
         {
@@ -81,12 +95,48 @@ public class CombatPlayer : MonoBehaviour
             {
                 collider.transform.GetComponent<PatrullaEnemigo>().GetDamage(damage);
             }
+            if (collider.CompareTag("Boss"))
+            {
+                collider.transform.GetComponent<Boss>().GetDamage(damage);
+            }
         }
     }
+    
+    private void HeavyAttack()
+    {
+        //Collider de la círculos de acción del ataque.
+        Collider2D[] objets = Physics2D.OverlapCircleAll(controller.position, radioHit);
+        Collider2D[] objets2 = Physics2D.OverlapCircleAll(controller2.position, radioHit);
+
+        //Cada Enemy que se encuentre dentro de cada círculo de acción recibe daño.
+        foreach (Collider2D collider in objets)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                collider.transform.GetComponent<PatrullaEnemigo>().GetDamage(damage*2);
+            }
+            if (collider.CompareTag("Boss"))
+            {
+                collider.transform.GetComponent<Boss>().GetDamage(damage*2);
+            }
+        }
+        foreach (Collider2D collider in objets2)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                collider.transform.GetComponent<PatrullaEnemigo>().GetDamage(damage*2);
+            }
+            if (collider.CompareTag("Boss"))
+            {
+                collider.transform.GetComponent<Boss>().GetDamage(damage*2);
+            }
+        }
+    }
+    
     public void GetDamage(float damage, Vector2 posicion)
     {
         health -= damage;
-        healthBar.changeActualHealth(health);
+        healthBar.ChangeActualHealth(health);
         StartCoroutine(PerderControl(tiempoPerdida));
         movimientoJugador.Rebote(posicion);
         if (health <= 0)
@@ -100,7 +150,7 @@ public class CombatPlayer : MonoBehaviour
     public void GetDamage(float damage)
     {
         health -= damage;
-        healthBar.changeActualHealth(health);
+        healthBar.ChangeActualHealth(health);
         StartCoroutine(PerderControl(tiempoPerdida));
         if (health <= 0)
         {
@@ -117,7 +167,7 @@ public class CombatPlayer : MonoBehaviour
             health += 10;
             CountCigarrete.count -= 1; // Resta 1 a la cantidad de cigarrillos
             health = Mathf.Clamp(health, 0, maxHealth); // Limita la salud al máximo de salud
-            healthBar.changeActualHealth(health);
+            healthBar.ChangeActualHealth(health);
         }
         canCure = false; // Desactiva la capacidad de curación temporalmente
         StartCoroutine(ReactivateCure()); // Reactiva la capacidad de curación después de un tiempo
@@ -147,7 +197,7 @@ public class CombatPlayer : MonoBehaviour
         bc2D.transform.position = new Vector3(positionXRespawn, positionYRespawn);
         animator.SetBool("Death", false);
         health = maxHealth;
-        healthBar.changeActualHealth(health);
+        healthBar.ChangeActualHealth(health);
         movimientoJugador.sePuedeMover = true;
     }
 
@@ -155,6 +205,7 @@ public class CombatPlayer : MonoBehaviour
     {
         CountCard.count = 0;
         CountCigarrete.count = 0;
+        HaveBar.haveBar = false;
     }
 
     private IEnumerator ReactivateCure()
@@ -180,6 +231,24 @@ public class CombatPlayer : MonoBehaviour
 
         isAttacking = false; // El personaje ha terminado de atacar
     }
+    
+    private IEnumerator PerformHeavyAttack()
+    {
+        HeavyAttack(); // Realizar el ataque
+
+        // Congelar la posición durante el ataque
+        rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
+
+        // Esperar hasta que termine la animación de ataque
+        yield return new WaitForSeconds(1f);
+
+        // Descongelar la posición después del ataque
+        rb2D.constraints = RigidbodyConstraints2D.None;
+        rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        isAttacking = false; // El personaje ha terminado de atacar
+    }
+
     
     //Método para dibujar los círculos de acción. Para poder visualizar su funcionamiento. Solo aparece en consola.
     private void OnDrawGizmos()

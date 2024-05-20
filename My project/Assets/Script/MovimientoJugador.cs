@@ -36,7 +36,7 @@ public class MovimientoJugador : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         bc2D = GetComponent<BoxCollider2D>();
         inicialGravity = rb2D.gravityScale;
-    }
+    } 
 
     void FixedUpdate()
     {
@@ -215,5 +215,25 @@ public class MovimientoJugador : MonoBehaviour
         {
             headBlock = false;
         }
+    } 
+    
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        //Cambiar velocidad si entra dentro del agua
+        if (collision.CompareTag("Water"))
+        {
+            speed = 3f;
+            jumpSpeed = 9f;
+        }
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Water"))
+        {
+            speed = 5f;
+            jumpSpeed = 7f;
+        }
+    }
+    
 }
