@@ -34,6 +34,7 @@ public class Boss : MonoBehaviour
     public bool playerInRange; // Indica si el jugador está en rango de disparo
     public bool playerInRange2; // Indica si el jugador está en rango de disparo
     public GameObject bullet; // Prefab de la bala que se dispara
+    public GameObject bulletRight; // Prefab de la bala que se dispara
     public float timeShots; // Tiempo entre disparos
     private float timeLastShot; // Tiempo del último disparo
     public float timeWaiting; // Tiempo de espera antes de disparar
@@ -103,7 +104,7 @@ public class Boss : MonoBehaviour
                     timeLastShot = Time.time;
                     // Activa la animación de disparo
                     animator.SetTrigger("Shoot");
-                    // Invoca el método Shoot después de un tiempo de espera
+                    // Invoca el método Shoot2 después de un tiempo de espera
                     Invoke(nameof(Shoot2), timeWaiting);
                 }
             }
@@ -211,7 +212,12 @@ public class Boss : MonoBehaviour
     {
         StartCoroutine(Freeze());
         // Instancia una bala en la posición y rotación del controllerShot2
-        Instantiate(bullet, controllerShot2.position, Quaternion.Euler(-90, 0, 0));
+        Instantiate(bulletRight, controllerShot2.position, controllerShot2.rotation);
+    }
+
+    private IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(2f);
     }
 
     private IEnumerator AttackRoutine()
@@ -262,7 +268,6 @@ public class Boss : MonoBehaviour
         Destroy(gameObject); // Destruye el objeto del enemigo
     }
     
-    
 
     // Método para dibujar los círculos de acción. Para poder visualizar su funcionamiento. Solo aparece en consola.
     private void OnDrawGizmos()
@@ -274,4 +279,3 @@ public class Boss : MonoBehaviour
         Gizmos.DrawLine(controllerShot2.position, controllerShot2.position + transform.right * distancePlayer * 1);
     }   
 }
-

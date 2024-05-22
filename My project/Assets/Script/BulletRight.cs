@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Código para los elementos que disparan los enemigos
-public class Bullet : MonoBehaviour
+public class BulletRight : MonoBehaviour
 {
     public float velocity;
     public int damage;
@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         //Movimiento de la bala. Vector2.left debido a que los enemigos que disparan todos miran a la izquierda
-        transform.Translate(Time.deltaTime * velocity * Vector2.left);
+        transform.Translate(Time.deltaTime * velocity * Vector2.right);
     }
 
     //Verificar si la "bala" golpea al jugador para causar daño
