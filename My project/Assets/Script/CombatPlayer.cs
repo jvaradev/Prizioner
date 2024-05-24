@@ -31,6 +31,12 @@ public class CombatPlayer : MonoBehaviour
     private BoxCollider2D bc2D;
     private MovimientoJugador movimientoJugador;
     
+    //Variables Disparo
+    public GameObject bullet; // Prefab de la bala que se dispara
+    public GameObject bulletRight; // Prefab de la bala que se dispara
+    public Transform controllerShot; // Transform que define la posición desde donde se disparan los proyectiles
+    public Transform controllerShot2; // Transform que define la posición desde donde se disparan los proyectiles
+    
     //Llamar a los componentes
     private void Start()
     {
@@ -61,6 +67,16 @@ public class CombatPlayer : MonoBehaviour
             animator.SetBool("Run",false);
             isAttacking = true; // El personaje está atacando
             StartCoroutine(PerformHeavyAttack());
+            StartCoroutine(PerderControl(1f));
+        }
+        
+        if (!isAttacking &&Input.GetButton("Fire2") && HaveGun.haveGun)
+        {
+            //Cambio parametros para comenzar animación "Punch"
+            animator.SetTrigger("Shoot");
+            animator.SetBool("Run",false);
+            isAttacking = true; // El personaje está atacando
+            StartCoroutine(PerformanceShoot());
             StartCoroutine(PerderControl(1f));
         }
         //Verificar si puede cuarase el jugador, pulsa la letra Q y tiene objetos de cura
@@ -131,6 +147,22 @@ public class CombatPlayer : MonoBehaviour
                 collider.transform.GetComponent<Boss>().GetDamage(damage*2);
             }
         }
+    }
+    
+    //Cambiar para que dispare
+    private void Shoot()
+    {
+        if (Input.GetKey("d"))
+        {
+            // Instancia una bala en la posición y rotación del controllerShot
+            Instantiate(bulletRight, controllerShot2.position, controllerShot2.rotation);
+        }
+        if (Input.GetKey("a"))
+        {
+            // Instancia una bala en la posición y rotación del controllerShot
+            Instantiate(bullet, controllerShot.position, controllerShot.rotation);
+        }
+        
     }
     
     public void GetDamage(float damage, Vector2 posicion)
@@ -239,6 +271,24 @@ public class CombatPlayer : MonoBehaviour
         // Congelar la posición durante el ataque
         rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
 
+        // Esperar hasta que termine la animación de ataque
+        yield return new WaitForSeconds(1f);
+
+        // Descongelar la posición después del ataque
+        rb2D.constraints = RigidbodyConstraints2D.None;
+        rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        isAttacking = false; // El personaje ha terminado de atacar
+    }
+    
+    private IEnumerator PerformanceShoot()
+    {
+        
+        // Congelar la posición durante el ataque
+        rb2D.constraints = RigidbodyConstraints2D.FreezePosition;
+        
+        Shoot(); // Realizar el ataque
+        
         // Esperar hasta que termine la animación de ataque
         yield return new WaitForSeconds(1f);
 

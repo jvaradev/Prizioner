@@ -182,13 +182,12 @@ public class PoliceZombiePatrol : MonoBehaviour
     
     private IEnumerator AttackRoutine()
     {
-        animator.SetBool("Charge",true);
+        animator.SetTrigger("Charge");
         while (isAttacking)
         {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(0.7f);
             if (isAttacking) // Solo atacar si aún está en modo ataque
             {
-                animator.SetBool("Charge",false);
                 animator.SetTrigger("Attack");
                 Attack();
             }

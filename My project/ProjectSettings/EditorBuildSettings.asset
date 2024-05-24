@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Duchas.unity
     guid: 4d031bd1d2010044c8530a90b11765ca
+  - enabled: 1
+    path: Assets/Scenes/Ext.unity
+    guid: 865fb825e0421864b979065160e1d315
   m_configObjects: {}

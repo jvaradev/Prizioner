@@ -40,11 +40,14 @@ public class Boss : MonoBehaviour
     public float timeWaiting; // Tiempo de espera antes de disparar
 
     private Coroutine attackCoroutine;
+    [SerializeField] private GameObject wallScene;
+    private BoxCollider2D bcWall;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
+        bcWall = wallScene.GetComponent<BoxCollider2D>();
         health = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
@@ -266,6 +269,7 @@ public class Boss : MonoBehaviour
         animator.SetBool("Death", true); // Activa la animación de muerte
         yield return new WaitForSeconds(0.75f); // Espera 0.75 segundos
         Destroy(gameObject); // Destruye el objeto del enemigo
+        bcWall.enabled = false;
     }
     
 
