@@ -12,16 +12,12 @@ public class MovimientoJugador : MonoBehaviour
     public Animator animator; // Referencia al componente Animator
     private SpriteRenderer spriteRenderer; // Referencia al componente SpriteRenderer
     private BoxCollider2D bc2D; // Referencia al componente BoxCollider2D
-    private Vector2 originalColliderSize; // Tamaño original del collider
-    private Vector2 originalColliderOffset; // Desplazamiento original del collider
     public bool sePuedeMover = true; // Determina si el jugador puede moverse
     [SerializeField] private Vector2 velocidadRebote; // Velocidad de rebote tras un golpe
 
     public bool headBlock; // Bloqueo de la cabeza del jugador
     [SerializeField] private BoxCollider2D crouchCollider; // Collider para cuando el jugador está agachado
-    private Vector2 offsetCrouch; // Desplazamiento del collider cuando está agachado
     [SerializeField] private BoxCollider2D idleCollider; // Collider para cuando el jugador está de pie
-    private Vector2 offsetIdle; // Desplazamiento del collider cuando está de pie
     public float distHead = 0.5f; // Distancia para detectar bloqueo en la cabeza
     public LayerMask capaPlataforma; // Capa de la plataforma para detectar colisiones
 
