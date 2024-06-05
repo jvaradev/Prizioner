@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        //Movimiento de la bala. Vector2.left debido a que los enemigos que disparan todos miran a la izquierda
+        //Movimiento de la bala. Vector2.left debido a que el enemigo dispara a la izquierda
         transform.Translate(Time.deltaTime * velocity * Vector2.left);
     }
 

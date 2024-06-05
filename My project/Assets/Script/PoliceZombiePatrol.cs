@@ -23,7 +23,7 @@ public class PoliceZombiePatrol : MonoBehaviour
     private bool isDead = false; // Variable para controlar si el enemigo está muerto
     private bool isHurt = false; // Variable para controlar si el enemigo está herido
     
-    // Ataque jefe
+    // Ataque
     [SerializeField] private Transform controllerAttack;
     [SerializeField] private Transform controllerAttack2;
     [SerializeField] private float radioAttack;
@@ -53,7 +53,7 @@ public class PoliceZombiePatrol : MonoBehaviour
         {
             if (IsPlayerInAttackRange())
             {
-                rb2D.velocity = Vector2.zero; // Detener al jefe
+                rb2D.velocity = Vector2.zero; // Detener
                 animator.SetBool("Walk", false);
 
                 if (!isAttacking)

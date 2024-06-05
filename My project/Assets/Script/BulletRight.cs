@@ -17,7 +17,7 @@ public class BulletRight : MonoBehaviour
 
     private void Update()
     {
-        //Movimiento de la bala. Vector2.left debido a que los enemigos que disparan todos miran a la izquierda
+        //Movimiento de la bala. Vector2.right debido a que el enemigo dispara a la derecha
         transform.Translate(Time.deltaTime * velocity * Vector2.right);
     }
 
