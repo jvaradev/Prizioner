@@ -30,6 +30,22 @@ public class Bullet : MonoBehaviour
             collision.transform.GetComponent<PlayerRespawn>().PlayerDamaged();
             Destroy(gameObject);
         }
+        if (collision.transform.CompareTag("Enemy"))
+        {
+            // Reduce la vida del enemigo
+            collision.gameObject.GetComponent<PatrullaEnemigo>().GetDamage(damage);
+            Destroy(gameObject);
+        }
+        if (collision.transform.CompareTag("Boss"))
+        {
+            collision.transform.GetComponent<Boss>().GetDamage(damage);
+            Destroy(gameObject);
+        }
+        if (collision.transform.CompareTag("PoliceEnemy"))
+        {
+            collision.transform.GetComponent<PoliceZombiePatrol>().GetDamage(damage);
+            Destroy(gameObject);
+        }
     }
 
     //Corrutina para destruir la "bala" pasado segundos y no crear muchos clones de "balas"

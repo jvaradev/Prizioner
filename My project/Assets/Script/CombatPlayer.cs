@@ -135,12 +135,20 @@ public class CombatPlayer : MonoBehaviour
             {
                 collider.transform.GetComponent<Boss>().GetDamage(damage*2);
             }
+            if (collider.CompareTag("PoliceEnemy"))
+            {
+                collider.transform.GetComponent<PoliceZombiePatrol>().GetDamage(damage*2);
+            }
         }
         foreach (Collider2D collider in objets2)
         {
             if (collider.CompareTag("Enemy"))
             {
                 collider.transform.GetComponent<PatrullaEnemigo>().GetDamage(damage*2);
+            }
+            if (collider.CompareTag("PoliceEnemy"))
+            {
+                collider.transform.GetComponent<PoliceZombiePatrol>().GetDamage(damage*2);
             }
             if (collider.CompareTag("Boss"))
             {
