@@ -9,7 +9,7 @@ public class BlockedOpenSecDoor : MonoBehaviour
     private float tiempoApertura = 2;
     private bool sceneChanged = false;
 
-    private void Start()
+    private void Start() 
     {
         animator = GetComponent<Animator>();
     }
